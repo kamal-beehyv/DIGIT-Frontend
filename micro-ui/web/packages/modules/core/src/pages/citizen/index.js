@@ -77,6 +77,8 @@ const sidebarHiddenFor = [
   `/${window?.contextPath}/citizen/select-location`,
   `/${window?.contextPath}/citizen/login`,
   `/${window?.contextPath}/citizen/register/otp`,
+  `/${window?.contextPath}/citizen/digit-assignment/register`,
+  `${window?.contextPath}/citizen/digit-assignment/register`,
 ];
 
 const getTenants = (codes, tenants) => {
@@ -129,7 +131,9 @@ const Home = ({
     window.open(obj);
   };
 
-  const hideSidebar = sidebarHiddenFor.some((e) => window.location.href.includes(e));
+  // Hide sidebar for specific routes and all digit-assignment module routes
+  const isDigitAssignmentRoute = window.location.href.includes('/citizen/digit-assignment');
+  const hideSidebar = sidebarHiddenFor.some((e) => window.location.href.includes(e)) || isDigitAssignmentRoute;
 
   // Create app routes with dynamic module loading and loading states for citizen modules
   const appRoutes = modules.map(({ code, tenants }, index) => {
@@ -209,7 +213,7 @@ const Home = ({
         mobileView={mobileView}
         handleUserDropdownSelection={handleUserDropdownSelection}
         logoUrl={logoUrl}
-        showSidebar={CITIZEN ? true : false}
+        showSidebar={CITIZEN && !isDigitAssignmentRoute ? true : false}
         linkData={linkData}
         islinkDataLoading={islinkDataLoading}
       />
@@ -255,6 +259,21 @@ const Home = ({
 
           <Route path="Audit" element={<Search />} />
 
+          {/* digit-assignment route (path /citizen/digit-assignment) - may not be in initData.modules */}
+          <Route
+            path="digit-assignment/*"
+            element={
+              <DynamicModuleLoader
+                moduleCode="Digit-Assignment"
+                stateCode={stateCode}
+                userType="citizen"
+                tenants={appTenants || []}
+                maxRetries={3}
+                retryDelay={1000}
+                initialDelay={800}
+              />
+            }
+          />
           {/* Dynamic App Routes and Module Level Link Home Pages */}
           {appRoutes}
           {ModuleLevelLinkHomePages}

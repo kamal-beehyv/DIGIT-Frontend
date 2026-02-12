@@ -1,0 +1,473 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Sign In Container – shared citizen screen container */
+.advocate-registration-container {
+  @include citizen-screen-container;
+  overflow-x: hidden;
+  position: relative;
+
+  @include tablet-up {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.advocate-registration-content {
+  max-width: 34.5em; /* 552px */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25em; /* 20px - mobile */
+  margin: 0 auto; /* Center the content */
+  box-sizing: border-box;
+  
+  @include tablet-up {
+    gap: 1.5em; /* 24px - tablet */
+  }
+  
+  @include desktop-up {
+    gap: 1.25em; /* 20px - desktop */
+    flex-shrink: 0;
+  }
+}
+
+/* Header Section */
+.registration-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 0.5em; /* 8px */
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.registration-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 0.25em; /* 4px */
+  width: 100%;
+}
+
+.registration-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  @include responsive-title;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+}
+
+.registration-subtitle {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  @include responsive-subtitle;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+}
+
+/* Registration Card (Phase 2: responsive-card-padding) */
+.registration-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include responsive-card-padding;
+  @include responsive-gap;
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  background: var(--digit-override-card-bg, #ffffff);
+  border: 1px solid var(--digit-override-border-light, #e8e8e8);
+  border-radius: 0 !important;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+
+.registration-card * {
+  border-radius: 0 !important;
+}
+
+/* Role Selection Tabs – scroll on mobile to avoid overflow (Phase 2) */
+.role-selection-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0;
+  gap: 0.75em;
+  width: 100%;
+  border-bottom: 1px solid var(--digit-override-border-light, #e8e8e8);
+  box-sizing: border-box;
+
+  @include mobile-only {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  @include tablet-up {
+    gap: 1em;
+  }
+  @include desktop-up {
+    gap: 1.25em;
+  }
+}
+
+/* Native tab buttons (DIGIT Tabs pattern: tablist/tab) – styling uses override variables */
+.role-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em; /* 8px */
+  gap: 0.5em; /* 8px */
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  min-width: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.214;
+  font-weight: 400;
+  color: var(--digit-override-text-muted, #7a7a7a);
+  margin: 0;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  white-space: nowrap;
+  text-align: center;
+}
+.role-tab.active {
+  font-weight: 700;
+  color: var(--digit-override-primary-hover, #008779);
+}
+
+/* When RoleSelectionTabs uses DIGIT Button, target its label (fallback) */
+.role-tab .digit-button-label,
+.role-tab h2 {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  color: inherit !important;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.role-tab-text {
+  width: auto;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.9375em; /* 15px - mobile */
+  line-height: 1.214;
+  color: var(--digit-override-text-muted, #6f767e);
+  margin: 0;
+  padding: 0 0.25em; /* 0 4px */
+  white-space: nowrap;
+  text-align: center;
+  
+  @include tablet-up {
+    font-size: 1em; /* 16px - tablet+ */
+  }
+  
+  @include small-mobile {
+    font-size: 0.875em; /* 14px - small mobile */
+  }
+}
+
+.role-tab.active .role-tab-text {
+  font-weight: 700;
+  color: var(--digit-override-primary-hover, #0a5757);
+}
+
+.role-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 1.25em); /* calc(100% - 20px) */
+  min-width: 6.25em; /* 100px - mobile */
+  height: 3px; /* Keep small height as px */
+  background: var(--digit-override-primary-hover, #0a5757);
+  border-radius: 0;
+  pointer-events: none; /* allow clicks to reach the button */
+  
+  @include tablet-up {
+    min-width: 7.5em; /* 120px - tablet+ */
+  }
+}
+
+/* Content Section */
+.registration-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 1.5em; /* 24px - mobile */
+  width: 100%;
+  
+  @include tablet-up {
+    gap: 1.5em; /* 24px - tablet */
+  }
+  
+  @include desktop-up {
+    gap: 1.5em; /* 24px - desktop */
+  }
+  
+  @include small-mobile {
+    gap: 1.25em; /* 20px - small mobile */
+  }
+}
+
+/* Phone Input Section */
+.phone-input-wrapper-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 0;
+  width: 100%;
+}
+
+.phone-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 0;
+  width: 100%;
+}
+
+.phone-input-section {
+  width: 100%;
+  position: relative;
+}
+
+.phone-label {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.214; /* 17px relative to 14px */
+  color: var(--digit-override-text-primary, #0b0c0c);
+  margin-bottom: 0.5em; /* 8px */
+  display: block;
+}
+
+.phone-input-wrapper {
+  width: 100%;
+  margin-top: 0.5em; /* 8px */
+}
+
+.phone-input-section .field-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 0;
+}
+
+.phone-input-section .text-input {
+  flex: 1;
+}
+
+/* Country code styling - matches design with light grey background and teal border */
+.phone-input-wrapper :global(.digit-mobile-number-container),
+.phone-input-section :global(.digit-mobile-number-container) {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.phone-input-wrapper :global(.digit-mobile-number-container .digit-citizen-card-input--front),
+.phone-input-section :global(.digit-mobile-number-container .digit-citizen-card-input--front),
+.phone-input-wrapper :global(.digit-citizen-card-input--front),
+.phone-input-section :global(.digit-citizen-card-input--front) {
+  background: var(--digit-override-input-bg-light, #f5f5f5) !important;
+  border: 1px solid var(--digit-override-border-light, #e8e8e8) !important;
+  border-right: 2px solid var(--digit-override-primary-hover, #008779) !important;
+  color: var(--digit-override-text-primary, #0b0c0c) !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-width: 3.375em !important;
+  width: fit-content !important;
+  height: 2.5em !important;
+  padding: 0.625em 0.75em !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+}
+
+.phone-input-wrapper :global(.digit-citizen-card-input--front) > *,
+.phone-input-section :global(.digit-citizen-card-input--front) > *,
+.phone-input-wrapper :global(.digit-citizen-card-input--front) span,
+.phone-input-section :global(.digit-citizen-card-input--front) span {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--digit-override-text-primary, #0b0c0c) !important;
+}
+
+.phone-input-wrapper :global(.digit-citizen-card-input),
+.phone-input-section :global(.digit-citizen-card-input) {
+  border-left: none !important;
+  border: 1px solid var(--digit-override-border, #505a5f) !important;
+}
+
+.error-message {
+  color: var(--digit-override-error, #d32f2f);
+  font-size: 0.75em; /* 12px */
+  margin-top: 0.25em; /* 4px */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Actions Section */
+.registration-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 1em; /* 16px */
+  width: 100%;
+}
+
+/* Sign In Button */
+.sign-in-button-wrapper {
+  width: 100%;
+}
+
+.sign-in-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625em 1.5em;
+  gap: 0.25em;
+  width: 100%;
+  min-height: 2.75em; /* 44px touch target (Phase 2) */
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.sign-in-button * {
+  border-radius: 0 !important;
+}
+
+.sign-in-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.sign-in-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.sign-in-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+/* Registration Link Row */
+.registration-link-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  padding: 0;
+  gap: 0.25em; /* 4px */
+  width: 100%;
+}
+
+.registration-link-text,
+.register-link {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.9375em; /* 15px - mobile */
+  line-height: 1.429;
+  margin: 0;
+  
+  @include tablet-up {
+    font-size: 1em; /* 16px - tablet+ */
+  }
+  
+  @include small-mobile {
+    font-size: 0.875em; /* 14px - small mobile */
+  }
+}
+
+.registration-link-text {
+  color: var(--digit-override-text-secondary, #7a7a7a);
+}
+
+/* Register here: link-style button (no background/border, inline with text) */
+.register-link {
+  color: var(--digit-override-primary-accent, #9e400a) !important;
+  text-decoration: underline !important;
+  cursor: pointer;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  min-height: unset !important;
+  height: auto !important;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+}
+
+.register-link:hover,
+.register-link:focus {
+  text-decoration: underline !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--digit-override-primary-accent, #9e400a) !important;
+}
+
+/* DIGIT Button inner label – inherit link look */
+.register-link .digit-button-label,
+.register-link h2 {
+  color: inherit !important;
+  text-decoration: inherit !important;
+  font-weight: 400 !important;
+  font-size: inherit !important;
+}
+
+/* Responsive adjustments */
+@include small-mobile {
+  .registration-link-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em; /* 4px */
+  }
+}

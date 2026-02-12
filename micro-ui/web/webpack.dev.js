@@ -2,6 +2,10 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const webpack = require("webpack");
 const path = require("path");
+const dotenv = require("dotenv");
+
+// Load .env file to ensure environment variables are available for proxy config
+dotenv.config();
 
 module.exports = merge(common, {
   mode: "development",
@@ -32,63 +36,18 @@ module.exports = merge(common, {
       },
       progress: true,
     },
-    watchFiles: {
-      paths: ["packages/**/*"],
-      options: {
-        usePolling: false,
-        ignored: /node_modules/,
-      },
+    // Use setupProxy.js for proxy configuration (includes mock API if enabled)
+    setupMiddlewares: (middlewares, devServer) => {
+      // Load setupProxy.js which handles both mock API and proxy setup
+      try {
+        const setupProxy = require("./src/setupProxy.js");
+        setupProxy(devServer.app);
+      } catch (error) {
+        console.warn("⚠️  Could not load setupProxy.js:", error.message);
+      }
+      return middlewares;
     },
-    proxy: [
-      {
-        context: [
-          "/egov-mdms-service",
-          "/access/v1/actions/mdms",
-          "/tenant-management",
-          "/user-otp",
-          "/mdms-v2",
-          "/egov-idgen",
-          "/egov-location",
-          "/localization",
-          "/egov-workflow-v2",
-          "/pgr-services",
-          "/filestore",
-          "/egov-hrms",
-          "/user",
-          "/fsm",
-          "/billing-service",
-          "/collection-services",
-          "/pdf-service",
-          "/pg-service",
-          "/vehicle",
-          "/vendor",
-          "/property-services",
-          "/dashboard-analytics",
-          "/egov-searcher",
-          "/egov-pdf",
-          "/egov-url-shortening",
-          "/inbox",
-          "/report",
-          "/loi-service",
-          "/project",
-          "/estimate-service",
-          "/muster-roll",
-          "/individual",
-          "/facility",
-          "/boundary-service",
-          "/org-services",
-          "/bpa-services",
-          "/noc-services",
-          "/health-hrms",
-          "/health-project",
-          "/fsm-calculator",
-          "/boundary-management"
-        ],
-        target: process.env.REACT_APP_PROXY_URL || "https://unified-qa.digit.org",
-        changeOrigin: true,
-        secure: false,
-      },
-    ],
+    // Proxy configuration is now handled by setupProxy.js
   },
   
   plugins: [

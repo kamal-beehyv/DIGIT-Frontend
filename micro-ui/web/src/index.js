@@ -5,10 +5,18 @@ import { Hooks } from "@egovernments/digit-ui-libraries";
 
 import { initLibraries } from "@egovernments/digit-ui-libraries";
 
-import "../packages/css/dist/index.css"
+import "../packages/css/dist/index.css";
+import "../micro-ui-internals/packages/modules/digit-assignment/dist/index.css";
+import "./styles/digit-assignment/digit-overrides.css";
+
 window.Digit = window.Digit || {};
 window.Digit.Hooks = Hooks;
-const DigitUILazy = lazy(() => import("@egovernments/digit-ui-module-core").then((module) => ({ default: module.DigitUI })));
+const DigitUILazy = lazy(() =>
+  import("@egovernments/digit-ui-module-core").then((module) => {
+    if (module.initCoreComponents) module.initCoreComponents();
+    return { default: module.DigitUI };
+  })
+);
 
 
 const enabledModules = ["assignment", "Workbench", "Utilities", "Campaign"];
@@ -41,9 +49,11 @@ const initTokens = (stateCode) => {
 };
 
 const initDigitUI = () => {
+  // globalConfigs loaded from index.html script (e.g. https://s3.ap-south-1.amazonaws.com/egov-dev-assets/globalConfigs.js)
+  // provides CONTEXT_PATH ("digit-ui"), STATE_LEVEL_TENANT_ID ("dev"), etc.
   window.contextPath = window?.globalConfigs?.getConfig("CONTEXT_PATH") || "digit-ui";
 
-  const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || "mz";
+  const stateCode = window?.globalConfigs?.getConfig("STATE_LEVEL_TENANT_ID") || process.env.REACT_APP_STATE_LEVEL_TENANT_ID || "dev";
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(<>
@@ -63,6 +73,8 @@ const MainApp = ({ stateCode, enabledModules }) => {
         
         const { initWorkbenchComponents } = await import("@egovernments/digit-ui-module-workbench")
         initWorkbenchComponents();
+        const { initDigitAssignmentComponents } = await import("@egovernments/digit-ui-module-digit-assignment");
+        initDigitAssignmentComponents();
       } catch (error) {
         console.log("Error loading modules:", error);
         // Continue without modules if they fail to load
@@ -83,7 +95,7 @@ const MainApp = ({ stateCode, enabledModules }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       {window.Digit && (
-        <DigitUILazy stateCode={stateCode} enabledModules={enabledModules} allowedUserTypes={["employee", "citizen"]} defaultLanding="employee" />
+        <DigitUILazy stateCode={stateCode} enabledModules={enabledModules} allowedUserTypes={["employee", "citizen"]} defaultLanding="citizen" />
       )}
     </Suspense>
   );

@@ -1,0 +1,161 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Registered Successfully Container – shared citizen screen container */
+.success-container {
+  @include citizen-screen-container(true);
+}
+
+.success-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Center the content */
+}
+
+.success-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3em 2.5em; /* 48px 40px */
+  gap: 1.5em; /* 24px */
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0.75em; /* 12px */
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1); /* 0px 2px 8px */
+  margin: 0 auto; /* Center the card */
+}
+
+.success-icon-wrap {
+  width: 5em; /* 80px */
+  height: 5em; /* 80px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.success-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.success-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.75em; /* 28px - Standard title size */
+  line-height: 1.33;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+}
+
+.success-subtext {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em; /* 16px */
+  width: 100%;
+  margin-top: 0.5em; /* 8px */
+}
+
+.file-case-button {
+  width: 80%;
+  height: 2.75em;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.429;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.file-case-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.file-case-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1em !important; /* 16px - increased from 14px */
+  line-height: 1.429 !important; /* 20px relative to 14px */
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+.join-case-button {
+  width: 80%;
+  height: 2.75em;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  color: var(--digit-override-primary-hover, #0a5757) !important;
+  background: #ffffff !important;
+  border: 2px solid var(--digit-override-primary-hover, #0a5757) !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.join-case-button .digit-button-label,
+.join-case-button h2,
+.join-case-button .digit-button-label h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1em !important; /* 16px - increased from 14px */
+  line-height: 1.429 !important; /* 20px relative to 14px */
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-primary-hover, #0a5757) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+.join-case-button:hover:not(:disabled) {
+  background-color: #f0fafa !important; /* Light background on hover for outline button */
+}
+
+@include until-large-desktop {
+  .success-card {
+    padding: 2em 1.5em; /* 32px 24px */
+    width: 100%;
+  }
+
+  .success-title {
+    font-size: 1.5em; /* 24px - increased from 20px */
+    line-height: 1.4;
+  }
+
+  .success-subtext {
+    font-size: 0.8125em;
+    line-height: 1.5;
+  }
+}

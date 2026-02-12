@@ -1,0 +1,310 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Verify Identity Container – shared citizen screen container */
+.verify-identity-container {
+  @include citizen-screen-container(true);
+}
+
+.verify-identity-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Center the content */
+}
+
+.verify-identity-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 1.5em; /* 24px */
+  width: 100%;
+  margin-bottom: 1.5em; /* 24px */
+}
+
+.verify-identity-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 0.25em; /* 4px */
+  width: 100%;
+}
+
+.verify-identity-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  @include responsive-title;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+}
+
+.verify-identity-subtitle {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  @include responsive-subtitle;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+}
+
+.verify-identity-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  @include responsive-card-padding;
+  width: 100%;
+  max-width: 34.5em;
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0.75em;
+  margin: 0 auto;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+}
+
+.verify-identity-form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em; /* 32px */
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1em; /* 16px spacing between card options */
+}
+
+/* Radio option cards: large tap targets on mobile (Phase 3) */
+.option-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.25em; /* 20px */
+  min-height: 3.5em; /* ~56px tap target on mobile */
+  background: var(--digit-override-input-bg, #fafafa);
+  border: 1px solid var(--digit-override-border-light, #e8e8e8);
+  border-radius: 0.5em; /* 8px */
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  @include mobile-only {
+    padding: 1em 1.25em;
+    min-height: 3.25em; /* comfortable tap area */
+  }
+}
+
+.option-content-wrapper {
+  display: grid;
+  grid-template-columns: auto 0.75em 1fr; /* radio button, gap, label/description */
+  grid-template-rows: auto auto;
+  width: 100%;
+  gap: 0.25em 0; /* 4px vertical gap between rows */
+  align-items: center;
+}
+
+.option-card-wrapper:hover {
+  border-color: var(--digit-override-primary-hover, #0a5757);
+}
+
+.option-card-wrapper.selected {
+  border-color: var(--digit-override-primary-hover, #0a5757);
+  border-width: 2px;
+  background: var(--digit-override-card-bg, #ffffff);
+}
+
+.card-radio-wrap {
+  grid-column: 1 / 4; /* Span all columns */
+  grid-row: 1;
+  width: 100%;
+  display: flex;
+}
+
+.card-radio-wrap > div {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  display: grid !important;
+  grid-template-columns: auto 0.75em 1fr; /* Match parent grid */
+  align-items: center !important; /* Center radio and label vertically */
+  width: 100%;
+}
+
+.card-radio-wrap > div > span {
+  grid-column: 1; /* Radio button in first column */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.card-radio-wrap > div > label {
+  grid-column: 3; /* Label in third column, matching description */
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+}
+
+
+.card-radio-wrap .radio-btn-wrap {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.card-radio-wrap .radio-btn-checkmark {
+  width: 1.25em !important; /* 20px */
+  height: 1.25em !important; /* 20px */
+  min-width: 1.25em !important;
+  min-height: 1.25em !important;
+  flex-shrink: 0;
+  border: 2px solid var(--digit-override-unselected-border, #9ca3af) !important; /* Light gray for unselected */
+  background-color: transparent !important;
+}
+
+.card-radio-wrap input:checked ~ .radio-btn-checkmark {
+  border-color: var(--digit-override-input-selected, #f97316) !important; /* Red-orange border when selected */
+  background-color: var(--digit-override-input-selected, #f97316) !important; /* Red-orange fill when selected */
+}
+
+.card-radio-wrap input:checked ~ .radio-btn-checkmark::after {
+  display: none !important; /* Hide inner circle as the entire circle is filled */
+}
+
+.option-description {
+  grid-column: 3; /* Start at the label column */
+  grid-row: 2;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.75em;
+  line-height: 1.5;
+  color: var(--digit-override-text-muted, #6f767e);
+  margin: 0;
+  padding: 0;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radio-checkmark {
+  position: relative;
+  display: inline-block;
+  width: 1.25em; /* 20px */
+  height: 1.25em; /* 20px */
+  min-width: 1.25em; /* 20px */
+  min-height: 1.25em; /* 20px */
+  border: 2px solid var(--digit-override-border, #505a5f); /* Keep border as px */
+  border-radius: 50%;
+  background-color: transparent;
+  margin-top: 0.125em; /* 2px */
+  flex-shrink: 0;
+}
+
+.option input:checked ~ .radio-checkmark {
+  border-color: var(--digit-override-primary-hover, #0a5757);
+}
+
+.option input:checked ~ .radio-checkmark::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.625em; /* 10px */
+  height: 0.625em; /* 10px */
+  border-radius: 50%;
+  background-color: var(--digit-override-primary-hover, #0a5757);
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em; /* 4px */
+  flex: 1;
+}
+
+.option-label-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5em; /* 8px */
+  flex-wrap: wrap;
+}
+
+.option-label {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+}
+
+.recommended-badge {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+}
+
+.option.selected .option-label {
+  font-weight: 500;
+}
+
+
+.verify-identity-actions {
+  width: 100%;
+}
+
+.continue-button {
+  width: 100%;
+  min-height: 2.75em; /* 44px touch target */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.continue-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.continue-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}

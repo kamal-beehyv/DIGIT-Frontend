@@ -1,0 +1,245 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Terms and Conditions Container – shared citizen screen container */
+.tnc-container {
+  @include citizen-screen-container;
+  position: relative;
+}
+
+.tnc-back-link {
+  position: absolute;
+  top: 2em;
+  left: 2.5em;
+  z-index: 10;
+}
+
+.tnc-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-top: 3em;
+  flex: 1;
+}
+
+.tnc-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  @include responsive-title;
+  text-align: left;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0 0 1.5em 0;
+  padding: 0;
+}
+
+.tnc-intro {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  @include responsive-subtitle;
+  line-height: 1.5;
+  color: var(--digit-override-text-label, #424242);
+  margin: 0 0 1.5em 0;
+  padding: 0;
+  text-align: left;
+}
+
+.tnc-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0;
+  background: transparent;
+  margin-bottom: 2em;
+  max-height: calc(100vh - 20em);
+}
+
+.tnc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.tnc-body section {
+  margin: 0;
+  padding: 0;
+}
+
+.tnc-body h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0 0 0.75em 0;
+  padding: 0;
+}
+
+.tnc-body ul {
+  margin: 0;
+  padding-left: 1.5em;
+  list-style-type: disc;
+}
+
+.tnc-body li {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  color: var(--digit-override-text-label, #424242);
+  margin: 0 0 0.5em 0;
+  padding: 0;
+}
+
+.tnc-body li:last-child {
+  margin-bottom: 0;
+}
+
+.tnc-body li strong {
+  font-weight: 600;
+  color: var(--digit-override-text-primary, #0a0a0a);
+}
+
+.tnc-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5em;
+  padding-top: 1.5em;
+  margin-top: auto;
+  border-top: none;
+  flex-shrink: 0;
+}
+
+.tnc-checkbox-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  flex: 1;
+
+  // Target global checkbox classes inside our wrapper
+  :global(.checkbox-wrap),
+  :global(.digit-checkbox-wrap) {
+    display: flex !important;
+    align-items: center !important; // Override items-baseline from base styles
+    margin-bottom: 0 !important; // Remove default margin
+    position: relative;
+    
+    input {
+      width: 28px !important;
+      height: 28px !important;
+      margin: 0 !important;
+      position: absolute !important;
+      left: 0 !important;
+      top: 0 !important;
+      opacity: 0 !important;
+      z-index: 10 !important;
+    }
+
+    :global(.custom-checkbox),
+    :global(.digit-custom-checkbox) {
+      width: 28px !important;
+      height: 28px !important;
+      min-width: 28px !important;
+      min-height: 28px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      position: absolute !important;
+    }
+
+    :global(.custom-checkbox) svg,
+    :global(.digit-custom-checkbox) svg {
+      width: 22px !important;
+      height: 22px !important;
+    }
+
+    :global(.label) {
+      display: inline-flex !important;
+      align-items: center !important;
+      // margin-left: 0.75em !important; // Proper spacing between checkbox and label
+      line-height: 28px !important; // Match checkbox height exactly
+      height: 28px !important; // Match checkbox height exactly
+      min-height: 28px !important;
+      max-height: 28px !important;
+      padding: 0 !important;
+      vertical-align: middle !important;
+      font-size: 1.125em !important; // Increased font size (18px)
+    }
+  }
+}
+
+/* Button: full-width on mobile, 44px height (Phase 3) */
+.proceed-button {
+  min-width: 10em;
+  min-height: 2.75em; /* 44px touch target */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+  padding: 0 2em;
+  @include mobile-only {
+    width: 100%;
+  }
+}
+
+.proceed-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.proceed-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.proceed-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+@include mobile-only {
+  .tnc-back-link {
+    top: 1em;
+    left: 0.75em;
+  }
+
+  .tnc-content {
+    padding-top: 2.5em;
+  }
+
+  .tnc-title {
+    margin-bottom: 1em;
+  }
+
+  .tnc-scroll {
+    max-height: calc(100vh - 18em);
+  }
+
+  .tnc-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1em;
+  }
+}

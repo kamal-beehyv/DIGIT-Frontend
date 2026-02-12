@@ -83,6 +83,32 @@ const TopBar = ({
       : [`/${window?.contextPath}/citizen/select-language`, `/${window?.contextPath}/citizen/select-location`].includes(pathname);
 
   if (CITIZEN) {
+    // Check for custom citizen topbar component
+    const CustomCitizenTopBar = Digit.ComponentRegistryService?.getComponent("CustomCitizenTopBar");
+
+    if (CustomCitizenTopBar) {
+      return (
+        <CustomCitizenTopBar
+          {...{
+            t,
+            stateInfo,
+            toggleSidebar,
+            isSidebarOpen,
+            handleLogout,
+            userDetails,
+            CITIZEN,
+            cityDetails,
+            mobileView,
+            userOptions,
+            handleUserDropdownSelection,
+            logoUrl,
+            logoUrlWhite,
+            showLanguageChange,
+          }}
+        />
+      );
+    }
+
     return (
       <div>
         <TopBarComponent

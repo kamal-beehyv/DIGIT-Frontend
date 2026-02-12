@@ -1,0 +1,125 @@
+@use "../styles/shared.module.scss" as *;
+
+/* Reusable role/option group – radio list with label + description per option */
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+  width: 100%;
+  flex: none;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.optionWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 1em 0; /* 16px 0 */
+  cursor: pointer;
+  position: relative;
+  gap: 0.75em; /* 12px */
+}
+
+.option:hover {
+  background-color: transparent;
+}
+
+.radioInput {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.radioCheckmark {
+  position: relative;
+  display: inline-block;
+  width: 1.25em; /* 20px */
+  height: 1.25em; /* 20px */
+  min-width: 1.25em;
+  min-height: 1.25em;
+  border: 2px solid var(--digit-override-border, #505a5f);
+  border-radius: 50%;
+  background-color: transparent;
+  margin-top: 0.125em; /* 2px */
+  flex-shrink: 0;
+}
+
+.option input:checked ~ .radioCheckmark {
+  border-color: var(--digit-override-primary-accent, #9e400a);
+}
+
+.option input:checked ~ .radioCheckmark::after {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.625em; /* 10px */
+  height: 0.625em;
+  border-radius: 50%;
+  background-color: var(--digit-override-primary-accent, #9e400a);
+}
+
+.optionContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em; /* 4px */
+  flex: 1;
+}
+
+.optionLabel {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1em; /* 16px */
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+}
+
+.optionDescription {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.875em; /* 14px */
+  line-height: 1.429;
+  color: var(--digit-override-text-muted, #6f767e);
+}
+
+.option.selected .optionLabel {
+  font-weight: 500;
+}
+
+.divider {
+  height: 1px;
+  background-color: var(--digit-override-border-light, #e8e8e8);
+  margin: 0;
+  width: 100%;
+}
+
+@include until-large-desktop {
+  .option {
+    padding: 0.75em 0; /* 12px 0 */
+  }
+
+  .optionLabel {
+    font-size: 0.9375em; /* 15px */
+    line-height: 1.467;
+  }
+
+  .optionDescription {
+    font-size: 0.8125em; /* 13px */
+    line-height: 1.385;
+  }
+}

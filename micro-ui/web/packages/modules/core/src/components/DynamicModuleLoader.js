@@ -14,7 +14,7 @@ const DynamicModuleLoader = ({
   tenants, 
   maxRetries = 5, 
   retryDelay = 1500,
-  initialDelay = 100 // Initial delay before first check to allow modules to register
+  initialDelay = 800 // Initial delay before first check to allow modules to register
 }) => {
   const [moduleState, setModuleState] = useState({
     module: null,
@@ -44,27 +44,30 @@ const DynamicModuleLoader = ({
           });
         } else {
           // Module not found, check if we should retry
-          if (moduleState.retryCount < maxRetries) {
-            setModuleState(prev => ({
-              ...prev,
-              retryCount: prev.retryCount + 1
-            }));
-            
-            // Retry after delay (exponential backoff)
-            const delay = retryDelay * Math.pow(1.5, moduleState.retryCount);
-            retryTimeout = setTimeout(() => {
-              loadModule();
-            }, delay);
-          } else {
-            // Max retries reached
-            setModuleState({
-              module: null,
-              loading: false,
-              error: `Module "${moduleCode}" not found after ${maxRetries} attempts`,
-              retryCount: moduleState.retryCount,
-              initialDelayComplete: true
-            });
-          }
+          setModuleState(prev => {
+            const newRetryCount = prev.retryCount + 1;
+            if (newRetryCount < maxRetries) {
+              // Retry after delay (exponential backoff)
+              const delay = retryDelay * Math.pow(1.5, prev.retryCount);
+              retryTimeout = setTimeout(() => {
+                loadModule();
+              }, delay);
+              
+              return {
+                ...prev,
+                retryCount: newRetryCount
+              };
+            } else {
+              // Max retries reached
+              return {
+                module: null,
+                loading: false,
+                error: `Module "${moduleCode}" not found after ${maxRetries} attempts`,
+                retryCount: newRetryCount,
+                initialDelayComplete: true
+              };
+            }
+          });
         }
       } catch (error) {
         console.error(`Error loading module ${moduleCode}:`, error);
@@ -97,7 +100,7 @@ const DynamicModuleLoader = ({
         clearTimeout(initialTimeout);
       }
     };
-  }, [moduleCode, moduleState.retryCount, moduleState.initialDelayComplete, maxRetries, retryDelay, initialDelay]);
+  }, [moduleCode, maxRetries, retryDelay, initialDelay]);
 
   // Show loading state
   if (moduleState.loading) {
@@ -124,9 +127,10 @@ const DynamicModuleLoader = ({
   // Show error state and redirect
   if (moduleState.error || !moduleState.module) {
     console.warn(`Module loading failed for ${moduleCode}:`, moduleState.error);
+    console.warn(`Available components:`, Object.keys(Digit.ComponentRegistryService.getAllComponents() || {}));
     return (
       <Navigate
-        to={`/${window?.contextPath}/employee/user/error?type=notfound&module=${moduleCode}&reason=${encodeURIComponent(moduleState.error || 'Module not found')}`}
+        to={`/${window?.contextPath}/${userType || 'citizen'}/user/error?type=notfound&module=${moduleCode}&reason=${encodeURIComponent(moduleState.error || 'Module not found')}`}
         replace
       />
     );

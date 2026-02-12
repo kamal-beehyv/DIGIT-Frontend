@@ -1,0 +1,331 @@
+/* Shared SCSS Variables and Mixins
+ * Phase 1 Foundation: Single source of truth for breakpoints and responsive utilities.
+ * Aligned with micro-ui/web/packages/css/src/theme-variables.css and RESPONSIVE_IMPLEMENTATION_PLAN.md
+ */
+
+// Typography Variables
+$font-family-primary: 'Roboto', sans-serif;
+$font-family-title: 'Roboto Condensed', 'Roboto', sans-serif;
+$font-family-system: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+// Font Sizes
+$font-size-title: 1.75em; /* 28px - increased from 24px */
+$font-size-subtitle: 1em; /* 16px - increased from 14px */
+$font-size-body: 1em; /* 16px */
+$font-size-small: 0.875em; /* 14px */
+$font-size-xs: 0.8125em; /* 13px */
+$font-size-xxs: 0.75em; /* 12px */
+
+// Line Heights
+$line-height-title: 1.33;
+$line-height-subtitle: 1.429; /* 20px relative to 14px */
+$line-height-body: 1.5;
+
+// Spacing
+$spacing-xs: 0.25em; /* 4px */
+$spacing-sm: 0.5em; /* 8px */
+$spacing-md: 1em; /* 16px */
+$spacing-lg: 1.5em; /* 24px */
+$spacing-xl: 2em; /* 32px */
+$spacing-xxl: 2.5em; /* 40px */
+$spacing-xxxl: 3em; /* 48px */
+
+// Button Heights
+$button-height-standard: 2.75em; /* 44px */
+$button-height-small: 2.5em; /* 40px */
+
+// Media Query Breakpoints
+// Mapped to theme-variables.css: --digitv2-screens-mobile, --digitv2-screens-tablet, --digitv2-screens-desktop
+// Plan: Small mobile 0–400px | Mobile 0–767px | Tablet 768–1023px | Desktop 1024px+ | Large desktop 1440px+
+$breakpoint-mobile-digit: 400px;      // = var(--digitv2-screens-mobile) — small mobile
+$breakpoint-tablet-digit: 768px;      // = var(--digitv2-screens-tablet)
+$breakpoint-desktop-digit: 1024px;    // = var(--digitv2-screens-desktop)
+$breakpoint-large-desktop: 1440px;    // Wide-screen (not in theme; module standard)
+
+// Legacy aliases (prefer DIGIT names above)
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// Breakpoint mixins (use these instead of raw @media): mobile-only | small-mobile | mobile-narrow | tablet-up | tablet-only | desktop-up | large-desktop-up | until-large-desktop
+
+// Mixins
+@mixin reset-margin-padding {
+  margin: 0;
+  padding: 0;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin standard-title {
+  width: 100%;
+  font-family: $font-family-title;
+  font-style: normal;
+  font-weight: 700;
+  font-size: $font-size-title;
+  line-height: $line-height-title;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  @include reset-margin-padding;
+}
+
+@mixin standard-subtitle {
+  width: 100%;
+  font-family: $font-family-primary;
+  font-style: normal;
+  font-weight: 400;
+  font-size: $font-size-subtitle;
+  line-height: $line-height-subtitle;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  @include reset-margin-padding;
+}
+
+@mixin special-button-base {
+  font-family: $font-family-primary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: $font-size-subtitle;
+  line-height: $line-height-subtitle;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Responsive Mixins - DIGIT UI Aligned */
+// Mobile-only: 0-767px (base styles - mobile-first)
+@mixin mobile-only {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+// Small Mobile: 0-400px (DIGIT UI standard)
+@mixin small-mobile {
+  @media (max-width: $breakpoint-mobile-digit) {
+    @content;
+  }
+}
+
+// Tablet and up: 768px+
+@mixin tablet-up {
+  @media (min-width: $breakpoint-tablet-digit) {
+    @content;
+  }
+}
+
+// Tablet only: 768px-1023px
+@mixin tablet-only {
+  @media (min-width: $breakpoint-tablet-digit) and (max-width: ($breakpoint-desktop-digit - 1px)) {
+    @content;
+  }
+}
+
+// Desktop and up: 1024px+ (DIGIT UI standard)
+@mixin desktop-up {
+  @media (min-width: $breakpoint-desktop-digit) {
+    @content;
+  }
+}
+
+// Large Desktop: 1440px+ (for wide screen optimizations)
+@mixin large-desktop-up {
+  @media (min-width: $breakpoint-large-desktop) {
+    @content;
+  }
+}
+
+// Below large desktop: max-width 1439px (use shared breakpoint instead of raw 1440px)
+@mixin until-large-desktop {
+  @media (max-width: ($breakpoint-large-desktop - 1px)) {
+    @content;
+  }
+}
+
+// Mobile narrow: max-width 480px (legacy breakpoint; prefer small-mobile for 400px)
+@mixin mobile-narrow {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+/* Responsive Spacing Utilities
+ * Use these instead of raw @media for container/card/gap so breakpoints stay consistent.
+ * Available: responsive-padding | responsive-container-padding | responsive-card-padding | responsive-gap
+ */
+@mixin responsive-padding {
+  padding: $spacing-md; /* 16px - mobile default */
+  
+  @include tablet-up {
+    padding: $spacing-lg; /* 24px - tablet */
+  }
+  
+  @include desktop-up {
+    padding: $spacing-xl; /* 32px - desktop */
+  }
+  
+  @include large-desktop-up {
+    padding: $spacing-xxl; /* 40px - large desktop */
+  }
+}
+
+@mixin responsive-container-padding {
+  padding: $spacing-md; /* 1em - mobile default */
+  @include small-mobile {
+    padding: 0.75em; /* Small mobile (≤400px) for consistency */
+  }
+  @include tablet-up {
+    padding: $spacing-lg; /* 24px - tablet */
+  }
+  @include desktop-up {
+    padding: $spacing-xl; /* 32px - desktop */
+  }
+  @include large-desktop-up {
+    padding: 2.5em; /* 40px - large desktop */
+  }
+}
+
+@mixin responsive-card-padding {
+  padding: $spacing-lg; /* 24px - mobile default */
+  
+  @include tablet-up {
+    padding: 2em $spacing-lg; /* 32px 24px - tablet */
+  }
+  
+  @include desktop-up {
+    padding: 2em 2.5em; /* 32px 40px - desktop */
+  }
+  
+  @include large-desktop-up {
+    padding: 3em 2.5em; /* 48px 40px - large desktop */
+  }
+}
+
+@mixin responsive-gap {
+  gap: 0.5em; /* 8px - same on all screens (citizen forms) */
+}
+
+/* Citizen screen container – shared base for all citizen page wrappers */
+@mixin citizen-screen-container($include-gap: false) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include responsive-container-padding;
+  @if $include-gap {
+    @include responsive-gap;
+  }
+  width: 100%;
+  max-width: 100%;
+  min-height: calc(100vh - 7.5em);
+  font-family: $font-family-system;
+  margin: 0;
+  box-sizing: border-box;
+  background: none;
+}
+
+/* Responsive Typography Mixins */
+@mixin responsive-title {
+  font-size: 1.5em; /* 24px - mobile */
+  line-height: 1.4;
+  
+  @include tablet-up {
+    font-size: 1.5em; /* 24px - tablet */
+    line-height: 1.4;
+  }
+  
+  @include desktop-up {
+    font-size: 1.75em; /* 28px - desktop */
+    line-height: 1.33;
+  }
+  
+  @include small-mobile {
+    font-size: 1.25em; /* 20px - small mobile */
+    line-height: 1.4;
+  }
+}
+
+@mixin responsive-subtitle {
+  font-size: 0.875em; /* 14px - mobile */
+  line-height: 1.429;
+  
+  @include tablet-up {
+    font-size: 0.9375em; /* 15px - tablet */
+    line-height: 1.429;
+  }
+  
+  @include desktop-up {
+    font-size: 1em; /* 16px - desktop */
+    line-height: 1.429;
+  }
+  
+  @include small-mobile {
+    font-size: 0.8125em; /* 13px - small mobile */
+    line-height: 1.5;
+  }
+}
+
+@mixin responsive-button-text {
+  font-size: 0.9375em; /* 15px - mobile */
+  
+  @include tablet-up {
+    font-size: 1em; /* 16px - tablet+ */
+  }
+  
+  @include small-mobile {
+    font-size: 0.875em; /* 14px - small mobile */
+  }
+}
+
+/* Shared Typography Styles */
+
+/* Standard Page Title - All screens */
+.page-title {
+  @include standard-title;
+}
+
+/* Standard Page Subtitle - All screens */
+.page-subtitle {
+  @include standard-subtitle;
+}
+
+/* Standard Section Title (h2, h3) */
+.section-title {
+  font-family: $font-family-primary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: $font-size-body;
+  line-height: $line-height-body;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  @include reset-margin-padding;
+}
+
+/* Shared Button Styles */
+
+/* Standard Button - All buttons except OTP/T&C buttons */
+.standard-button {
+  font-family: $font-family-primary;
+  font-style: normal;
+  font-weight: 500;
+  font-size: $font-size-subtitle;
+  line-height: $line-height-subtitle;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+/* Special Buttons Base - OTP buttons, Terms and Conditions, View My Application, File a Case, Join a Case */
+.special-button-base {
+  @include special-button-base;
+}

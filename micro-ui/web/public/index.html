@@ -15,8 +15,10 @@
   <meta name="theme-color" content="#00bcd1" />
   <title>DIGIT</title>
   <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+  <!-- Global config: STATE_LEVEL_TENANT_ID (e.g. "dev"), CONTEXT_PATH ("digit-ui"). Used for MDMS/tenant APIs (state, city, district). -->
   <!-- <script src="https://egov-dev-assets.s3.ap-south-1.amazonaws.com/globalConfigsWorkbenchHCMMZ.js"></script> -->
-     <% if (REACT_APP_GLOBAL) { %><script src="<%= REACT_APP_GLOBAL %>"></script><% } %>
+  <script src="https://s3.ap-south-1.amazonaws.com/egov-dev-assets/globalConfigs.js"></script>
+  <!-- <% if (REACT_APP_GLOBAL) { %><script src="<%= REACT_APP_GLOBAL %>"></script><% } %> -->
 
 </head>
 

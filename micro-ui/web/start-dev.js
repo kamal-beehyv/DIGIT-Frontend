@@ -62,7 +62,7 @@ async function startDevelopment() {
     // Start the concurrent processes
     const devProcess = spawn('npx', [
       'concurrently',
-      '--names', 'CSS,Core,Workbencßh,Webpack',
+      '--names', 'CSS,Core,Workbench,Webpack',
       '--prefix-colors', 'yellow,magenta,cyan',
       '"cd packages/css && npm run start"',
       '"cd packages/modules/core && npm run build:dev -- --watch"',

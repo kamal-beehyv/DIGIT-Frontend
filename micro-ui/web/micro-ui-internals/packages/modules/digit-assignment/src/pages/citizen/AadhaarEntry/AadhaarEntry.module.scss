@@ -1,0 +1,369 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Aadhaar Entry Container – shared citizen screen container */
+.aadhaar-entry-container {
+  @include citizen-screen-container(true);
+}
+
+.aadhaar-entry-content {
+  width: 100%;
+  max-width: 34.5em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @include responsive-gap;
+  margin: 0 auto;
+}
+
+.aadhaar-entry-header {
+  width: 100%;
+  text-align: center;
+}
+
+.aadhaar-entry-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  @include responsive-title;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0 0 0.5em 0;
+  padding: 0;
+}
+
+.aadhaar-entry-instruction {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+}
+
+.aadhaar-entry-card {
+  display: flex;
+  flex-direction: column;
+  @include responsive-card-padding;
+  @include responsive-gap;
+  width: 100%;
+  max-width: 34.5em;
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0.75em;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+}
+
+.aadhaar-entry-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25em; /* 4px */
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.aadhaar-entry-card-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.75em; /* 28px - Standard title size */
+  line-height: 1.33;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+}
+
+.aadhaar-entry-card-description {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+}
+
+.aadhaar-entry-form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em; /* 20px */
+}
+
+.aadhaar-segments {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75em; /* 12px */
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.aadhaar-segment-wrap {
+  flex: 1;
+  min-width: 6.25em; /* 100px */
+  max-width: none;
+}
+
+/* Aadhaar segments: 44px min height, 16px font on mobile (Phase 3) */
+.aadhaar-segment-wrap input {
+  text-align: center;
+  font-size: 1em; /* 16px avoid iOS zoom on mobile */
+  letter-spacing: 0.125em; /* 2px */
+  border-radius: 0;
+  width: 100%;
+  min-height: 2.75em; /* 44px touch target */
+  box-sizing: border-box;
+  @include tablet-up {
+    font-size: 1.125em; /* 18px tablet+ */
+  }
+}
+
+.error-wrap {
+  width: 100%;
+}
+
+.aadhaar-entry-actions {
+  width: 100%;
+  margin-top: 0.5em; /* 8px */
+}
+
+.get-otp-button {
+  width: 100%;
+  min-height: 2.75em; /* 44px touch target */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.get-otp-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.get-otp-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+/* OTP Modal – Phase 3: aligned with MobileScreen/OTPModal responsive patterns */
+.otp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--digit-override-overlay-bg, #363636);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1em; /* mobile */
+  box-sizing: border-box;
+  @include small-mobile {
+    padding: 0.75em;
+  }
+  @include tablet-up {
+    padding: 1.25em;
+  }
+}
+
+.otp-modal-card {
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0.5em; /* 8px */
+  width: 100%;
+  max-width: 31.25em; /* 500px */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.25em 1.5em rgba(0, 0, 0, 0.15); /* 0 4px 24px */
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+}
+
+.otp-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.25em 1.5em 0; /* 20px 24px 0 */
+  flex-shrink: 0;
+}
+
+.otp-modal-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+    font-size: 1.5em; /* 24px - increased from 20px */
+  line-height: 1.4; /* 28px relative to 20px */
+  color: var(--digit-override-text-primary, #1a1a1a);
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  padding-right: 0.75em; /* 12px */
+}
+
+.otp-close-button {
+  background: var(--digit-override-bg-neutral, #e0e0e0);
+  border: none;
+  cursor: pointer;
+  padding: 0.5em; /* 8px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--digit-override-text-primary, #1a1a1a);
+  border-radius: 0.375em; /* 6px */
+  flex-shrink: 0;
+}
+
+.otp-close-button:hover {
+  background-color: var(--digit-override-bg-disabled, #d0d0d0);
+}
+
+.otp-close-button svg {
+  width: 1.5em; /* 24px */
+  height: 1.5em; /* 24px */
+}
+
+.otp-modal-content {
+  padding: 1.25em 1.25em 1em; /* mobile */
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em; /* 20px */
+  @include tablet-up {
+    padding: 1.5em 1.5em 1.25em;
+  }
+}
+
+.otp-instruction {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px */
+  line-height: 1.5; /* 24px relative to 16px */
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+  padding: 0;
+}
+
+.otp-input-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.otp-input-container .input-otp-wrap {
+  display: flex;
+  gap: 0.75em; /* 12px */
+  justify-content: center;
+}
+
+/* OTP inputs: touch-friendly, no overflow (Phase 3) */
+.otp-input-container .input-otp-wrap input {
+  width: 2.75em; /* 44px mobile */
+  height: 2.75em;
+  min-width: 2.75em;
+  min-height: 2.75em;
+  border: 1px solid var(--digit-override-border-muted, #cccccc);
+  border-radius: 0;
+  text-align: center;
+  font-size: 1em; /* 16px mobile */
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  color: var(--digit-override-text-dark, #333333);
+  background: var(--digit-override-card-bg, #ffffff);
+  box-sizing: border-box;
+  @include tablet-up {
+    width: 3em;
+    height: 3em;
+    font-size: 1.125em;
+  }
+}
+
+.otp-error {
+  color: var(--digit-override-error, #d32f2f);
+  font-size: 1em; /* 16px - increased from 14px */ /* 14px */
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+.otp-resend-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.otp-timer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */ /* 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+}
+
+.resend-otp-button {
+  background: none;
+  border: none;
+  color: var(--digit-override-error-link, #a82020);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */ /* 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.resend-otp-button:hover {
+  color: var(--digit-override-error-link-hover, #8b1a1a);
+}
+
+.otp-modal-footer {
+  padding: 1em 1.5em 1.5em; /* 16px 24px 24px */
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--digit-override-border-light, #e8e8e8); /* Keep border as px */
+  flex-shrink: 0;
+}
+
+.verify-button {
+  padding: 0.625em 1.5em;
+  height: 2.75em;
+  min-width: 7.5em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1em; /* 16px - increased from 14px */ /* 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0.375em;
+  cursor: pointer;
+}
+
+.verify-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important; /* Standard hover color */
+}
+
+.verify-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+

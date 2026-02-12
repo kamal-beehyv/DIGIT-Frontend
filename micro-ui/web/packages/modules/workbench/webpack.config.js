@@ -130,6 +130,9 @@ module.exports = {
 
   devtool: isProduction ? "hidden-source-map" : "cheap-module-source-map", // faster rebuilds in dev
 
+  // When using webpack --watch, ignore node_modules to avoid ENOSPC (inotify limit)
+  ...(isDevelopment ? { watchOptions: { ignored: /node_modules/, aggregateTimeout: 300 } } : {}),
+
   devServer: isDevelopment
     ? {
         static: {

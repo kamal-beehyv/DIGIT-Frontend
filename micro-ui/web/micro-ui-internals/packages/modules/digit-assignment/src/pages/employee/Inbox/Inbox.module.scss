@@ -1,0 +1,26 @@
+.inbox-container {
+  padding: 1rem;
+}
+
+.header-section {
+  margin-bottom: 1rem;
+}
+
+.inbox-title {
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em; /* 24px - Standard title size */
+  line-height: 1.33;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin-bottom: 1rem;
+}
+
+.empty-state {
+  padding: 2rem;
+  text-align: center;
+}
+
+.table-cell {
+  padding: 12px;
+  font-size: 14px;
+}

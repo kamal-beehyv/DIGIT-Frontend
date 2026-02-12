@@ -16,45 +16,55 @@ DIGIT platform is microservices based API platform enabling quick rebundling of 
 
 This repository contains source code for web implementation of the new Digit UI modules with dependencies and libraries.
 
-Workbench module is used to Manage the master data (MDMS V2 Service) used across the DIGIT Services / Applications
-
-It is also used to manage the Localisation data present in the system (Localisation service)
+Workbench module is used to manage master data (MDMS V2 Service) and Localisation data used across DIGIT Services. The Digit-Assignment module provides advocate registration (citizen and employee) flows.
 
 ## Run Locally
 
-Clone the project
+**1. Clone the project**
 
 ```bash
-  git clone https://github.com/egovernments/DIGIT-Frontend.git
+git clone https://github.com/egovernments/DIGIT-Frontend.git
+cd DIGIT-Frontend
+git checkout digit-assignment
 ```
 
-Go to the Sub directory to run UI
+**2. Go to the web app directory**
 
 ```bash
-    cd into micro-ui/web/micro-ui-internals
+cd micro-ui/web
 ```
 
-Install dependencies
+**3. Create `.env` from `.env.digit-assignment`**
 
 ```bash
-  yarn install
+cp .env.digit-assignment .env
 ```
 
-Add .env file
+**4. Build assignment**
 
 ```bash
-    micro-ui/web/micro-ui-internals/example/.env
+yarn build:digit-assignment
 ```
 
-Start the server
+**5. Install dependencies and build**
 
 ```bash
-  yarn start
+yarn install
+yarn build
 ```
+
+Then start the dev server and open the app:
+
+```bash
+yarn start
+```
+
+- **Citizen (advocate registration):** [http://localhost:3000/digit-ui/citizen/digit-assignment](http://localhost:3000/digit-ui/citizen/digit-assignment)
+- **Employee (inbox):** `http://localhost:3000/digit-ui/employee/digit-assignment/inbox`
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run this project, you will need to add the following environment variables to your `.env` file. For Digit-Assignment with mock API, you can copy `micro-ui/web/.env.digit-assignment` to `micro-ui/web/.env`.
 
 `REACT_APP_PROXY_API` :: `{{server url}}`
 
@@ -92,7 +102,7 @@ To run this project, you will need to add the following environment variables to
 
 ## Documentation
 
-[Documentation](https://https://core.digit.org/guides/developer-guide/ui-developer-guide/digit-ui)
+[Documentation](https://core.digit.org/guides/developer-guide/ui-developer-guide/digit-ui)
 
 ## Support
 
@@ -100,36 +110,14 @@ For support, add the issues in https://github.com/egovernments/DIGIT-core/issues
 
 ## Modules
 
-    1. Core
-    2. Workbench
-    3. HRMS
-    4. Dashboard
-    5. Engagement
-    6. Payment
-    
+1. **Core** – DIGIT UI core and citizen/employee shells
+2. **Workbench** – Master data (MDMS V2), Localisation, boundaries
+3. **Digit-Assignment** – Advocate registration (citizen sign-in/registration, employee inbox/approval)
+4. HRMS
+5. Dashboard
+6. Engagement
+7. Payment
 
-## Starting with Digit-UI App (Impelmentation Teams) - MICRO-UI
-
-Go to the Sub directory to run UI
-
-```bash
-    cd into micro-ui/web
-```
-
-```bash
-  yarn install
-```
-
-Add .env file
-
-```bash
-    micro-ui/web/.env
-```
-
-Start the server
-
-```bash
-  yarn start
-```
+For module-specific docs (e.g. Digit-Assignment), see `micro-ui/web/micro-ui-internals/packages/modules/<module-name>/README.md`.
 
 ![Logo](https://s3.ap-south-1.amazonaws.com/works-dev-asset/mseva-white-logo.png)

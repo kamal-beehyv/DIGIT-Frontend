@@ -1,0 +1,94 @@
+.application-details-container {
+  padding: 1rem;
+}
+
+.application-details-loading {
+  padding: 2rem;
+}
+
+.application-details-not-found {
+  padding: 2rem;
+}
+
+.back-button-container {
+  margin-bottom: 1rem;
+}
+
+.application-title {
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em; /* 24px - Standard title size */
+  line-height: 1.33;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin-bottom: 1rem;
+}
+
+.details-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1em; /* 16px */
+  line-height: 1.5;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin-bottom: 1rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.detail-item {
+  // Base styles for detail items
+}
+
+.action-buttons-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.approve-button {
+  background-color: #00703C !important;
+}
+
+.reject-button {
+  background-color: #D4351C !important;
+}
+
+.processed-message {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modal-content {
+  padding: 1rem;
+}
+
+.modal-label {
+  margin-bottom: 0.5rem;
+}
+
+.modal-error {
+  margin-top: 0.5rem;
+}
+
+.modal-hint {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  color: #666;
+}

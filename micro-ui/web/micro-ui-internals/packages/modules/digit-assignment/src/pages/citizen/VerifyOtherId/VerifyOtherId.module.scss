@@ -1,0 +1,39 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Verify Other Id – shared citizen screen container */
+.verify-other-container {
+  @include citizen-screen-container;
+}
+
+.verify-other-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  margin: 0 auto; /* Center the content */
+}
+
+.verify-other-card {
+  @include responsive-card-padding;
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0.75em; /* 12px */
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1); /* 0px 2px 8px */
+  margin: 0 auto; /* Center the card */
+}
+
+.verify-other-title {
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  @include responsive-title;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0 0 1em 0;
+  text-align: center;
+}
+
+.verify-other-message {
+  @include responsive-subtitle;
+  font-weight: 400;
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+  text-align: center;
+}

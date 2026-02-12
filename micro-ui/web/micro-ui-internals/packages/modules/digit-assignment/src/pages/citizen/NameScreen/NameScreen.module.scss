@@ -1,0 +1,160 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Name Entry Container – shared citizen screen container */
+.name-entry-container {
+  @include citizen-screen-container;
+}
+
+.name-entry-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Center the content */
+}
+
+.name-entry-card {
+  display: flex;
+  flex-direction: column;
+  @include responsive-card-padding;
+  width: 100%;
+  max-width: 100%;
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0.5em; /* 8px */
+  box-shadow: 0 0.125em 0.25em rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin: 0 auto; /* Center the card */
+}
+
+.name-entry-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 1.5em; /* 24px - mobile */
+  width: 100%;
+  @include tablet-up { margin-bottom: 1.75em; }
+  @include desktop-up { margin-bottom: 2em; }
+}
+
+.name-entry-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 0.5em; /* 8px */
+  width: 100%;
+}
+
+.name-entry-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  @include responsive-title;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+}
+
+.name-entry-subtitle {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  @include responsive-subtitle;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+}
+
+/* Form: single column, consistent gap (via shared responsive-gap) */
+.name-entry-form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  @include responsive-gap;
+}
+
+.name-entry-form-content .label-field-pair {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  color: var(--digit-override-text-dark, #333333);
+  margin-bottom: 0.5em; /* 8px */
+}
+
+.optional-text {
+  font-weight: 400;
+  color: var(--digit-override-text-mid, #666666);
+}
+
+.field-container {
+  width: 100%;
+  display: block;
+}
+
+.name-entry-container .field-container input[type="text"],
+.name-entry-container .citizen-card-input {
+  min-height: 2.75em; /* 44px touch target */
+  font-size: 1em; /* 16px avoid iOS zoom */
+}
+
+.name-entry-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+  margin-top: 0.5em; /* 8px */
+}
+
+.continue-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75em 1.5em; /* 12px 24px */
+  width: 100%; /* full-width on mobile */
+  min-height: 2.75em; /* 44px touch target */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer;
+}
+
+.continue-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.continue-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.continue-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}

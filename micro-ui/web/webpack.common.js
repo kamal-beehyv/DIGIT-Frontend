@@ -77,6 +77,7 @@ module.exports = {
       // Add aliases for local packages to ensure proper resolution
       "@egovernments/digit-ui-module-core": path.resolve(__dirname, "packages/modules/core/dist/main.js"),
       "@egovernments/digit-ui-module-workbench": path.resolve(__dirname, "packages/modules/workbench/dist/main.js"),
+      "@egovernments/digit-ui-module-digit-assignment": path.resolve(__dirname, "micro-ui-internals/packages/modules/digit-assignment/dist/index.js"),
       "@egovernments/digit-ui-css": path.resolve(__dirname, "packages/css/dist/index.css"),
     },
     fallback: {

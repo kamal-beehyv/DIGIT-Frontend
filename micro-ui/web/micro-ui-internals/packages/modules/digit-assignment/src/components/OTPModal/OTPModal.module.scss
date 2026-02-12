@@ -1,0 +1,286 @@
+@use "../../styles/shared.module.scss" as *;
+
+/* OTP Modal Overlay */
+.otp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--digit-override-overlay-bg, rgba(54, 54, 54, 0.7));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1.25em; /* 20px */
+  box-sizing: border-box;
+}
+
+/* OTP Modal Card */
+.otp-modal-card {
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0;
+  width: 100%;
+  max-width: 31.25em; /* 500px */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.25em 1.5em rgba(0, 0, 0, 0.15); /* 0 4px 24px */
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 9999;
+}
+
+.otp-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5em 1.5em 0; /* 24px 24px 0 */
+  flex-shrink: 0;
+  position: relative;
+}
+
+.otp-modal-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.25em; /* 20px */
+  line-height: 1.4; /* 28px relative to 20px */
+  color: var(--digit-override-text-primary, #1a1a1a);
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  padding-right: 2.5em; /* space for close button */
+}
+
+/* Close button: top-right corner of modal */
+.otp-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--digit-override-bg-neutral, #e0e0e0);
+  border: none;
+  cursor: pointer;
+  padding: 0.5em; /* 8px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--digit-override-text-primary, #1a1a1a);
+  transition: color 0.2s, background-color 0.2s;
+  border-radius: 0.375em; /* 6px */
+  flex-shrink: 0;
+}
+
+.otp-close-button:hover {
+  color: var(--digit-override-text-primary, #1a1a1a);
+  background-color: var(--digit-override-bg-disabled, #d0d0d0);
+}
+
+.otp-close-button svg {
+  width: 1.5em; /* 24px */
+  height: 1.5em; /* 24px */
+}
+
+.otp-modal-content {
+  padding: 1.5em 1.5em 0; /* 24px 24px 0 */
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em; /* 20px */
+}
+
+.otp-instruction {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em;
+  line-height: 1.5;
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* OTP inputs: full width of modal */
+.otp-input-container {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: stretch;
+}
+
+/* Use :global() to target the global .input-otp-wrap class from base DIGIT CSS */
+.otp-input-container :global(.input-otp-wrap) {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 100% !important;
+  gap: 0 !important;
+  margin-bottom: 0 !important; /* Override base mb-lg */
+  align-items: stretch;
+}
+
+.otp-input-container :global(.input-otp-wrap) :global(input) {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: auto !important; /* Override base w-10 fixed width */
+  max-width: none !important;
+  height: 3em !important; /* 48px */
+  border: 1px solid var(--digit-override-border-muted, #cccccc) !important; /* Keep border as px */
+  border-radius: 0;
+  text-align: center;
+  font-size: 1.125em !important; /* 18px */
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  color: var(--digit-override-text-dark, #333333);
+  background: var(--digit-override-card-bg, #ffffff);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  margin: 0 !important; /* Override base mr-sm mb-sm */
+  padding: 0 !important;
+}
+
+.otp-input-container :global(.input-otp-wrap) :global(input:focus) {
+  outline: none;
+  border-color: var(--digit-override-verify-teal, #1daa96);
+  box-shadow: 0 0 0 0.125em rgba(29, 170, 150, 0.2); /* 0 0 0 2px */
+}
+
+.otp-error {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.875em; /* 14px */
+  color: var(--digit-override-error, #d32f2f);
+  margin: 0;
+  text-align: left;
+}
+
+/* Countdown and Resend OTP on same line */
+.otp-resend-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 0.5em; /* 8px */
+  flex-wrap: wrap;
+}
+
+.otp-timer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em; /* 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+  padding: 0;
+}
+
+/* Resend OTP: same size as countdown text, inline next to it */
+.resend-otp-button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em; /* 14px - same as .otp-timer */
+  line-height: 1.429; /* same as .otp-timer */
+  background: none;
+  border: none;
+  color: var(--digit-override-error-link, #a82020);
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  min-height: 0;
+  text-decoration: underline;
+  transition: color 0.2s;
+  display: inline;
+  vertical-align: baseline;
+}
+
+.resend-otp-button:hover:not(:disabled) {
+  color: var(--digit-override-error-link-hover, #8b1a1a);
+  text-decoration: underline;
+}
+
+.resend-otp-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: var(--digit-override-text-disabled, #999999);
+  text-decoration: none;
+}
+
+.otp-modal-footer {
+  padding: 1.25em 1.5em 1.5em; /* 20px 24px 24px */
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--digit-override-border-light, #e8e8e8); /* Keep border as px */
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* Verify button = teal/dark cyan #1DAA96, no radius */
+.verify-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625em 1.5em; /* 10px 24px */
+  height: 2.75em; /* 44px */
+  min-width: 7.5em; /* 120px */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.875em; /* 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  text-align: center;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.verify-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important; /* Standard hover color */
+}
+
+.verify-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.verify-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.875em !important; /* 14px - Standard font size */
+  line-height: 1.429 !important; /* 20px relative to 14px */
+  text-align: center;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+}
+
+/* Mobile Responsive – use shared breakpoints */
+@include until-large-desktop {
+  .otp-modal-card {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .otp-modal-content {
+    padding: 1.25em; /* 20px */
+  }
+
+  .otp-input-container {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .otp-input-container :global(.input-otp-wrap) {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: space-evenly !important;
+  }
+
+  .otp-input-container :global(.input-otp-wrap) :global(input) {
+    flex: 1 !important;
+    width: auto !important;
+    height: 2.5em !important; /* 40px */
+    font-size: 1.125em !important; /* 18px */
+    margin: 0 !important;
+  }
+}

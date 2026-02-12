@@ -1,0 +1,699 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Mobile Number Entry Container – shared citizen screen container */
+.mobile-number-container {
+  @include citizen-screen-container(true);
+  isolation: isolate;
+  border-radius: 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+  z-index: 0;
+  position: relative;
+}
+
+.mobile-number-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em; /* 24px - mobile */
+  margin: 0 auto; /* Center the content */
+  
+  @include tablet-up {
+    gap: 2em; /* 32px - tablet */
+  }
+  
+  @include desktop-up {
+    gap: 2.5em; /* 40px - desktop */
+  }
+  
+  @include large-desktop-up {
+    gap: 3em; /* 48px - large desktop */
+  }
+}
+
+/* Header Section */
+.mobile-number-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 1.5em; /* 24px */
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  z-index: 1;
+}
+
+.mobile-number-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 0.25em; /* 4px */
+  width: 100%;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.mobile-number-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  @include responsive-title;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  white-space: normal;
+  letter-spacing: 0;
+}
+
+.mobile-number-subtitle {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  @include responsive-subtitle;
+  text-align: center;
+  color: var(--digit-override-text-secondary, #3d3c3c);
+  margin: 0;
+  padding: 0;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  white-space: normal;
+}
+
+.mobile-number-subtitle.card-sub-header {
+  text-align: center !important;
+  font-weight: 400 !important;
+  @include responsive-subtitle;
+  line-height: 1.714 !important;
+  color: var(--digit-override-text-secondary, #3d3c3c) !important;
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+}
+
+/* Mobile Number Card (Phase 2: responsive-card-padding) */
+.mobile-number-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include responsive-card-padding;
+  gap: 1.5em;
+  width: 100%;
+  max-width: 34.5em;
+  min-height: 20.25em;
+  background: var(--digit-override-card-bg, #ffffff);
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 2;
+  border-radius: 0;
+  box-sizing: border-box;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+  margin: 0 auto;
+
+  @include small-mobile {
+    gap: 1.25em;
+  }
+}
+
+.mobile-number-form-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 2em; /* 32px */
+  width: 100%;
+  max-width: 100%;
+  min-height: 11.875em; /* 190px */
+  border-radius: 0;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin-top: 0;
+}
+
+/* Mobile Input Section */
+.mobile-input-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0;
+  gap: 0.5em; /* 8px */
+  width: 100%;
+  max-width: 100%;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  border: none !important;
+  background: transparent !important;
+}
+
+.mobile-input-section .card-label {
+  margin-bottom: 0.5em !important; /* 8px */
+}
+
+.mobile-label {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1em; /* 16px */
+  line-height: 1.188; /* 19px relative to 16px */
+  color: var(--digit-override-text-primary, #0b0c0c);
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.mobile-label.card-label {
+  margin-bottom: 0.5em !important; /* 8px */
+  text-align: left !important;
+}
+
+.mobile-input-wrapper {
+  width: 100%;
+  margin-top: 0.5em; /* 8px */
+}
+
+.mobile-input-section .field-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 0;
+}
+
+.mobile-input-wrapper :global(.digit-mobile-number-container),
+.mobile-input-section :global(.digit-mobile-number-container) {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+
+.mobile-input-wrapper :global(.digit-mobile-number-container .digit-citizen-card-input--front),
+.mobile-input-section :global(.digit-mobile-number-container .digit-citizen-card-input--front),
+.mobile-input-wrapper :global(.digit-citizen-card-input--front),
+.mobile-input-section :global(.digit-citizen-card-input--front),
+.mobile-input-section .citizen-card-input--front {
+  box-sizing: border-box !important;
+  background: var(--digit-override-input-bg-light, #f5f5f5) !important;
+  border: 1px solid var(--digit-override-border-light, #e8e8e8) !important;
+  border-right: 2px solid var(--digit-override-primary-hover, #008779) !important;
+  padding: 0.625em 0.75em !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 1em !important;
+  line-height: 1.188 !important;
+  color: var(--digit-override-text-primary, #0b0c0c) !important;
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 0 !important;
+  min-width: 3.375em !important;
+  width: fit-content !important;
+  min-height: 2.75em !important; /* 44px touch target (Phase 2) */
+  @include tablet-up {
+    min-height: 2.5em !important;
+  }
+}
+
+.mobile-input-wrapper :global(.digit-citizen-card-input--front) > *,
+.mobile-input-section :global(.digit-citizen-card-input--front) > *,
+.mobile-input-wrapper :global(.digit-citizen-card-input--front) span,
+.mobile-input-section :global(.digit-citizen-card-input--front) span {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: var(--digit-override-text-primary, #0b0c0c) !important;
+}
+
+.mobile-input-section .text-input {
+  flex: 1;
+}
+
+/* Phase 2: full width, 44px min height on mobile, 1em font (iOS zoom) */
+.mobile-input-section .citizen-card-input,
+.mobile-input-section :global(.digit-citizen-card-input) {
+  width: 100%;
+  padding: 0.625em 0.75em;
+  box-sizing: border-box;
+  border: 1px solid var(--digit-override-border, #505a5f);
+  border-left: none !important;
+  border-radius: 0;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 1.188;
+  color: var(--digit-override-text-primary, #0b0c0c);
+  outline: none;
+  min-height: 2.75em; /* 44px touch target on mobile */
+  @include tablet-up {
+    min-height: 2.5em;
+  }
+}
+
+.mobile-input-section .citizen-card-input:focus {
+  border-color: var(--digit-override-border, #505a5f);
+  outline: none;
+}
+
+.error-message {
+  color: var(--digit-override-error, #d32f2f);
+  font-size: 0.75em; /* 12px */
+  margin-top: 0.25em; /* 4px */
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Mobile Number Actions - same width as mobile input row */
+.mobile-number-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 1.25em; /* 20px */
+  width: 100%;
+  max-width: 100%;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  margin-top: 0;
+}
+
+.mobile-number-actions.action-bar {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+/* Ensure Button wrapper takes full width so button matches input row */
+.mobile-number-actions > * {
+  width: 100%;
+}
+
+.continue-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625em 1.5em;
+  gap: 0.25em;
+  width: 100%;
+  max-width: 100%;
+  min-height: 2.75em; /* 44px touch target (Phase 2) */
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  box-shadow: none !important;
+}
+
+.continue-button.submit-bar {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.continue-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.continue-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.continue-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+/* OTP: overlay only (no outer card) + single white card */
+.otp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--digit-override-overlay, rgba(54, 54, 54, 0.7));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 1.25em; /* 20px */
+  box-sizing: border-box;
+}
+
+.popup-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+}
+
+/* Single card - no nested outer card, no radius */
+.otp-modal-card {
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0;
+  width: 100%;
+  max-width: 31.25em; /* 500px */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0.25em 1.5em rgba(0, 0, 0, 0.15); /* 0 4px 24px */
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 9999;
+  
+  @include mobile-only {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+.otp-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.5em 1.5em 0; /* 24px 24px 0 */
+  flex-shrink: 0;
+  position: relative;
+}
+
+.otp-modal-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+    font-size: 1.5em; /* 24px - increased from 20px */
+  line-height: 1.4; /* 28px relative to 20px */
+  color: var(--digit-override-text-primary, #1a1a1a);
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  padding-right: 2.5em; /* space for close button */
+}
+
+/* Close button: top-right corner of modal */
+.otp-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em; /* 8px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--digit-override-text-secondary, #7a7a7a);
+  transition: color 0.2s, background-color 0.2s;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+.otp-close-button:hover {
+  color: var(--digit-override-text-primary, #1a1a1a);
+  background-color: var(--digit-override-bg-light, #f5f5f5);
+}
+
+.otp-close-button svg {
+  width: 1.5em; /* 24px */
+  height: 1.5em; /* 24px */
+}
+
+.otp-modal-content {
+  padding: 1.5em 1.5em 0; /* 24px 24px 0 */
+  display: flex;
+  flex-direction: column;
+  gap: 1.25em; /* 20px */
+}
+
+.otp-instruction {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em;
+  line-height: 1.5;
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* OTP inputs: full width of modal */
+.otp-input-container {
+  display: flex !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  align-items: stretch;
+}
+
+/* Use :global() to target the global .input-otp-wrap class from base DIGIT CSS */
+.otp-input-container :global(.input-otp-wrap) {
+  display: flex !important;
+  justify-content: space-evenly !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  flex: 1 1 100% !important;
+  gap: 0 !important;
+  margin-bottom: 0 !important; /* Override base mb-lg */
+  align-items: stretch;
+}
+
+.otp-input-container :global(.input-otp-wrap) :global(input) {
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  width: auto !important; /* Override base w-10 fixed width */
+  max-width: none !important;
+  height: 3em !important; /* 48px */
+  border: 1px solid var(--digit-override-border-muted, #cccccc) !important; /* Keep border as px */
+  border-radius: 0;
+  text-align: center;
+  font-size: 1.125em !important; /* 18px */
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  color: var(--digit-override-text-dark, #333333);
+  background: var(--digit-override-card-bg, #ffffff);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+  margin: 0 !important; /* Override base mr-sm mb-sm */
+  padding: 0 !important;
+}
+
+.otp-input-container :global(.input-otp-wrap) :global(input:focus) {
+  outline: none;
+  border-color: var(--digit-override-verify-teal, #1daa96);
+  box-shadow: 0 0 0 0.125em rgba(29, 170, 150, 0.2); /* 0 0 0 2px */
+}
+
+.otp-error {
+  color: var(--digit-override-error, #d32f2f);
+  font-size: 0.875em; /* 14px */
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  text-align: left;
+}
+
+/* Countdown and Resend OTP on same line; Resend disabled until countdown ends */
+.otp-resend-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  gap: 0.5em; /* 8px */
+  flex-wrap: wrap;
+}
+
+.otp-timer {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em; /* 14px */
+  line-height: 1.429; /* 20px relative to 14px */
+  color: var(--digit-override-text-label, #424242);
+  margin: 0;
+  padding: 0;
+}
+
+/* Resend OTP: same size as countdown text, inline next to it */
+.resend-otp-button {
+  background: none;
+  border: none;
+  color: var(--digit-override-text-label, #424242);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 0.875em; /* 14px - same as .otp-timer */
+  line-height: 1.429; /* same as .otp-timer */
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  min-height: 0;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: inline;
+  vertical-align: baseline;
+}
+
+.resend-otp-button:hover:not(:disabled) {
+  color: var(--digit-override-verify-teal, #1daa96);
+  text-decoration: underline;
+}
+
+.resend-otp-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  color: var(--digit-override-text-disabled, #999999);
+}
+
+.otp-modal-footer {
+  padding: 1.25em 1.5em 1.5em; /* 20px 24px 24px */
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid var(--digit-override-border-light, #e8e8e8); /* Keep border as px */
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+/* Verify button = teal/dark cyan #1DAA96, no radius */
+.verify-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625em 1.5em; /* 10px 24px */
+  height: 2.75em; /* 44px - maintain touch target */
+  min-width: 7.5em; /* 120px */
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.9375em; /* 15px - mobile */
+  line-height: 1.429;
+  text-align: center;
+  color: var(--digit-override-button-text, #ffffff);
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  @include tablet-up {
+    font-size: 1em; /* 16px - tablet+ */
+  }
+  
+  @include small-mobile {
+    font-size: 0.875em; /* 14px - small mobile */
+    min-width: 6.25em; /* 100px - smaller on small mobile */
+  }
+}
+
+.verify-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important; /* Standard hover color */
+}
+
+.verify-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.verify-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 0.9375em !important; /* 15px - mobile */
+  line-height: 1.429 !important;
+  text-align: center;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  
+  @include tablet-up {
+    font-size: 1em !important; /* 16px - tablet+ */
+  }
+  
+  @include small-mobile {
+    font-size: 0.875em !important; /* 14px - small mobile */
+  }
+}
+
+/* Responsive adjustments */
+.otp-modal-card {
+  @include mobile-only {
+    max-width: 100%;
+    margin: 0;
+  }
+}
+
+.otp-modal-content {
+  padding: 1.25em; /* 20px - mobile */
+  
+  @include tablet-up {
+    padding: 1.5em; /* 24px - tablet+ */
+  }
+  
+  @include small-mobile {
+    padding: 1em; /* 16px - small mobile */
+  }
+}
+
+.otp-input-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  
+  :global(.input-otp-wrap) {
+    width: 100% !important;
+    max-width: 100% !important;
+    justify-content: space-evenly !important;
+    
+    :global(input) {
+      flex: 1 !important;
+      width: auto !important;
+      height: 2.5em !important; /* 40px - maintain touch target */
+      font-size: 1.125em !important; /* 18px */
+      margin: 0 !important;
+      
+      @include small-mobile {
+        height: 2.75em !important; /* 44px - larger touch target on small mobile */
+        font-size: 1em !important; /* 16px - prevent iOS zoom */
+      }
+    }
+  }
+}

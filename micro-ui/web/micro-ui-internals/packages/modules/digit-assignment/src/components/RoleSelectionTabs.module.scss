@@ -1,0 +1,17 @@
+.role-selection-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.role-tab {
+  border: none;
+  box-shadow: none;
+  
+  &.active {
+    // Active state styling handled by Button variation="primary"
+  }
+  
+  &:not(.active) {
+    background: transparent;
+  }
+}

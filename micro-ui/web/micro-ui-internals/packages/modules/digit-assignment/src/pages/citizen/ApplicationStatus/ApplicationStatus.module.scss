@@ -1,0 +1,147 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Application Status Container – shared citizen screen container */
+.application-status-container {
+  @include citizen-screen-container(true);
+}
+
+.application-status-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto; /* Center the content */
+}
+
+.application-status-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3em 2.5em; /* 48px 40px */
+  gap: 1.5em; /* 24px */
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  background: var(--digit-override-card-bg, #ffffff);
+  border-radius: 0;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1); /* 0px 2px 8px */
+  margin: 0 auto; /* Center the card */
+}
+
+.status-icon-wrap {
+  width: 5em; /* 80px */
+  height: 5em; /* 80px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-icon {
+  font-size: 3em; /* 48px */
+  line-height: 1;
+}
+
+.status-title {
+  width: 100%;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.75em; /* 28px - Standard title size */
+  line-height: 1.33;
+  text-align: center;
+  color: var(--digit-override-text-primary, #0a0a0a);
+  margin: 0;
+  padding: 0;
+}
+
+.status-message,
+.status-submessage {
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em; /* 16px - increased from 14px */
+  line-height: 1.5;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.status-message {
+  color: var(--digit-override-text-primary, #0a0a0a);
+}
+
+.status-submessage {
+  color: var(--digit-override-text-secondary, #3d3c3c);
+}
+
+.status-actions {
+  width: 100%;
+  margin-top: 0.5em; /* 8px */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.status-actions > * {
+  width: 100%;
+}
+
+.view-application-button {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.625em 1.5em !important; /* 10px 24px */
+  gap: 0.25em !important; /* 4px */
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 2.75em !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 1em !important; /* 16px - increased from 14px */
+  line-height: 1.429 !important; /* 20px relative to 14px */
+  text-align: center !important;
+  text-transform: capitalize !important;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+  align-self: stretch !important;
+  box-shadow: none !important;
+}
+
+.view-application-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.view-application-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1em !important; /* 16px - increased from 14px */
+  line-height: 1.429 !important; /* 20px relative to 14px */
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}
+
+@include until-large-desktop {
+  .application-status-card {
+    padding: 2em 1.5em; /* 32px 24px */
+    width: 100%;
+  }
+
+  .status-title {
+    font-size: 1.5em; /* 24px - increased from 20px */
+    line-height: 1.4;
+  }
+
+  .status-message,
+  .status-submessage {
+    font-size: 0.8125em;
+    line-height: 1.5;
+  }
+}

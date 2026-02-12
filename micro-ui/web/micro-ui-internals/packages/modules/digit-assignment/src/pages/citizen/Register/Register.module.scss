@@ -1,0 +1,271 @@
+@use "../../../styles/shared.module.scss" as *;
+
+/* Register Page Wrapper */
+.register-page-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Back Button Container */
+.back-button-container {
+  width: 100%;
+  padding: 1em 1em 0; /* 16px 16px 0 - mobile */
+  box-sizing: border-box;
+  
+  @include tablet-up {
+    padding: 1em 1.5em 0; /* 16px 24px 0 - tablet */
+  }
+  
+  @include desktop-up {
+    padding: 1em 2em 0; /* 16px 32px 0 - desktop */
+  }
+  
+  @include large-desktop-up {
+    padding: 1em 2.5em 0; /* 16px 40px 0 - large desktop */
+  }
+}
+
+/* Register Screen Container – shared citizen screen container */
+.advocate-registration-container {
+  @include citizen-screen-container(true);
+  isolation: isolate;
+  border-radius: 0.75em;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 1;
+  z-index: 0;
+  position: relative;
+}
+
+.advocate-registration-content {
+  width: 100%;
+  max-width: 34.5em; /* 552px */
+  display: flex;
+  margin: 0 auto; /* Center the content */
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em; /* 24px - mobile */
+  
+  @include tablet-up {
+    gap: 2em; /* 32px - tablet */
+  }
+  
+  @include desktop-up {
+    gap: 2.5em; /* 40px - desktop */
+  }
+  
+  @include large-desktop-up {
+    gap: 3em; /* 48px - large desktop */
+  }
+}
+
+/* Header Section */
+.registration-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 1.5em; /* 24px */
+  width: 100%;
+  flex: none;
+  flex-grow: 0;
+  z-index: 1;
+}
+
+.registration-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 0.25em; /* 4px */
+  width: 100%;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.registration-title {
+  width: 100% !important;
+  font-family: 'Roboto Condensed', 'Roboto', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  @include responsive-title;
+  text-align: center !important;
+  color: var(--digit-override-text-primary, #0a0a0a) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.registration-subtitle {
+  width: 100% !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  @include responsive-subtitle;
+  text-align: center !important;
+  color: var(--digit-override-text-secondary, #3d3c3c) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Registration Card (Phase 2: responsive-card-padding) */
+.registration-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @include responsive-card-padding;
+  gap: 1.5em;
+  width: 100%;
+  max-width: 34.5em;
+  min-height: 20.25em;
+  background: var(--digit-override-card-bg, #ffffff);
+  margin: 0 auto;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  z-index: 2;
+  border-radius: 0;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: 0 0.125em 0.5em rgba(0, 0, 0, 0.1);
+
+  @include small-mobile {
+    gap: 1.25em;
+  }
+}
+
+.registration-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 1.5em; /* 24px - mobile */
+  width: 100%;
+  max-width: 29.5em; /* 472px */
+  min-height: 11.875em; /* 190px */
+  border-radius: 0;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+  
+  @include tablet-up {
+    gap: 1.75em; /* 28px - tablet */
+  }
+  
+  @include desktop-up {
+    gap: 2em; /* 32px - desktop */
+  }
+  
+  @include small-mobile {
+    gap: 1.25em; /* 20px - small mobile */
+  }
+}
+
+/* Role Options Container – layout wrapper for RoleOptionGroup */
+.role-options-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+  width: 100%;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Register Actions – same width as role options (radio group) */
+.registration-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 1.25em; /* 20px */
+  width: 100%;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Ensure Button wrapper takes full width to match radio options row */
+.registration-actions > * {
+  width: 100%;
+}
+
+/* Full-width on mobile, 44px min height (Phase 2) */
+.continue-button {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.625em 1.5em !important;
+  gap: 0.25em !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 2.75em !important; /* 44px touch target */
+  font-family: 'Roboto', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center !important;
+  text-transform: capitalize !important;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  background: var(--digit-override-primary-hover, #0a5757) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+  flex: none !important;
+  order: 0 !important;
+  align-self: stretch !important;
+  flex-grow: 0 !important;
+  box-shadow: none !important;
+}
+
+.continue-button:hover:not(:disabled) {
+  background-color: var(--digit-override-primary, #084848) !important;
+}
+
+.continue-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Phase 2: form inputs – 44px min height, 1em font on mobile (iOS zoom) */
+@include mobile-only {
+  .registration-card input:not([type="radio"]):not([type="checkbox"]),
+  .registration-card select,
+  .registration-card textarea {
+    min-height: 2.75em;
+    font-size: 1em;
+  }
+}
+
+.continue-button h2 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  @include responsive-button-text;
+  line-height: 1.429 !important;
+  text-align: center;
+  text-transform: capitalize;
+  color: var(--digit-override-button-text, #ffffff) !important;
+  margin: 0 !important;
+  pointer-events: none;
+}

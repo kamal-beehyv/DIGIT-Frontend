@@ -1,0 +1,13 @@
+/* Citizen App Wrapper - Ensure full width and height for proper centering */
+.advocate-registration-citizen-app {
+  width: 100% !important;
+  min-height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  background-color: var(--digit-override-bg, #f0f0f0) !important;
+}
